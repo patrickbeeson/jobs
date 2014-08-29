@@ -1,9 +1,7 @@
 *.DS_Store
 *.pyc
 *.db
-media
 build
 migrations
 *.hgignore
 *.hg
-settings
