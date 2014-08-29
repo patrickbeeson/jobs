@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load markup %}
+
+{% block title %}{{ job.title }}{{ block.super }}{% endblock title %}
+
+{% block page_title %}{{ job.title}}{% endblock page_title %}
+
+{% block viewtype %}job_detail{% endblock %}
+
+{% block meta_noindex %}{% if job.is_expired %}<meta name="robots" content="noindex">{% endif %}{% endblock meta_noindex %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'home' %}">All Jobs</a></li>
+    <li><a href="{% url 'jobs:job_detail' job.slug %}" class="active">{{ job.title }}</a></li>
+</ol>
+
+	{% if job.is_expired %}<div class="alert alert-warning">This position has been filled.</div>{% endif %}
+
+	{{ job.description|markup|safe }}
+
+	{{ job.requirements|markup|safe }}
+
+	{% if job.portfolio_required %}
+		<p><em>YOU MUST INCLUDE A LINK TO YOUR PORTFOLIO SITE FOR CONSIDERATION.</em></p>
+	{% endif %}
+
+	<p><strong>Due to the high volume of responses, we will only be able to contact you if we move forward with your candidacy. Thank you for your interest in The Variable.</strong></p>
+
+	<p><strong>Posted:</strong> {{ job.posted_date|date:"N j" }}{% if job.modified %}; updated {{ job.modified|date:"N j" }} at {{ job.modified|date:"P" }}{% endif %}</p>
+
+	<a href="{% url 'jobs:application_create' job.slug %}"><button type="button" class="btn btn-primary">Apply for this job</button></a>
+
+
+{% endblock %}

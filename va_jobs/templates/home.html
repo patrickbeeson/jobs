@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load markup %}
+
+{% block title %}Jobs at The Variable{{ block.super }}{% endblock title %}
+
+{% block page_title %}Jobs at The Variable{% endblock page_title %}
+
+{% block viewtype %}job_list{% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'home' %}" class="active">All Jobs</a></li>
+</ol>
+<ul>
+{% for job in jobs_list %}
+	<li>
+        <a href="{% url 'jobs:job_detail' job.slug %}">{{ job.title }}</a> <small>(posted {{ job.posted_date|date:"N j" }}{% if job.modified %}; changed {{ job.modified|date:"N j" }} at {{ job.modified|date:"P" }}{% endif %})</small>
+        {% if job.modified %}<span class="label label-default">Updated</span>{% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

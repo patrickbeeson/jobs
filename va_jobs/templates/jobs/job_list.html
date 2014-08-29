@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load markup %}
+
+{% block title %}Jobs at The Variable{{ block.super }}{% endblock title %}
+
+{% block page_title %}Jobs at The Variable{% endblock page_title %}
+
+{% block viewtype %}job_list{% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="/jobs/" class="active">All Jobs</a></li>
+</ol>
+<ul>
+{% for job in job_list %}
+	<li><a href="{{ job.get_absolute_url }}">{{ job.title }}</a> <small>(posted {{ job.posted_date }})</small></li>
+{% endfor %}
+</ul>
+{% endblock %}

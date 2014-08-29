@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load markup widget_tweaks %}
+
+{% block viewtype %}application_form{% endblock %}
+
+{% block title %}{{ job.title }} application{{ block.super }}{% endblock title %}
+
+{% block page_title %}{{ job.title}} application{% endblock page_title %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'home' %}">All Jobs</a></li>
+	<li><a href="{% url 'jobs:job_detail' job.slug %}">{{ job.title }}</a></li>
+	<li><a href="{% url 'jobs:application_create' job.slug %}" class="active">Apply</a></li>
+</ol>
+
+<p><em>Note: Fields with an asterisk are required.</em></p>
+<form id="job_application_form" role="form" action="" enctype="multipart/form-data" method="post">
+{% csrf_token %}
+{% for field in form.visible_fields %}
+	<div class="form-group">
+		{% if field.errors %}
+		<ul class="field_errors list-unstyled list-inline">
+			{% for error in field.errors %}
+			<li class="text-warning"><span class="glyphicon glyphicon-warning-sign"></span> {{ error|escape }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		{% if field.name == "portfolio_url" %}
+		{% else %}
+			{{ field.label_tag }}
+		{% endif %}
+		{% if field.name == "portfolio_url" %}
+			{% if job.portfolio_required %}{{ field.label_tag }} <small><span class="glyphicon glyphicon-asterisk"></span></small>
+			{% endif %}
+		{% endif %}
+		{% if field.field.required %} <small><span class="glyphicon glyphicon-asterisk"></span></small>{% endif %}
+		{% if field.name == "resume" or field.name == "can_relocate" %}
+			{{ field|add_class:"form-control short" }}
+		{% elif field.name == "start_date" %}
+			<input id="id_start_date" class="form-control short" name="start_date" type="date" /><input id="initial-id_start_date" name="initial-start_date" type="hidden" />
+		{% elif field.name == "portfolio_url" %}
+			{% if job.portfolio_required %}
+				<input class="form-control" id="id_portfolio_url" maxlength="200" name="portfolio_url" type="url" required />
+			{% endif %}
+		{% else %}
+		{{ field|add_class:"form-control" }}
+		{% endif %}
+		{% if field.help_text %}<p class="help-block">{{ field.help_text }}</p>{% endif %}
+	</div>
+{% endfor %}
+	<input type="submit" class="btn btn-default" value="Apply">
+</form>
+<p class="text-info"><span class="glyphicon glyphicon-warning-sign"></span> Please <a href="mailto:pbeeson@thevariable.com">email us</a> if you have problems using this form.</p>
+{% endblock %}

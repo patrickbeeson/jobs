@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load markup %}
+
+{% block title %}Application submitted{{ block.super }}{% endblock title %}
+
+{% block viewtype %}application_submitted{% endblock %}
+
+{% block page_title %}Application submitted{% endblock page_title %}
+
+{% block content %}
+
+	<p>Your application has been submitted. Due to the high volume of responses, we will only be able to contact you if we move forward with your candidacy. Thank you for your interest in The Variable.</p>
+
+	<p><a href="{% url 'home' %}">View other openings at The Variable</a></p>
+
+{% endblock %}

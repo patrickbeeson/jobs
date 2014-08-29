@@ -1,0 +1,146 @@
+/* Global styles for jobs.thevariable.com */
+/* Author: Patrick Beeson, pbeeson@thevariable.com */
+
+/* GLOBAL */
+body {
+	padding-top: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
+	padding-bottom: 100px;
+	background:url(../img/footer-bg.jpg) repeat-x center bottom;
+}
+
+h1 {
+	color: #4c7785;
+	font-family: 'Quicksand', sans-serif;
+	text-transform: uppercase;
+}
+
+a {
+	color: #000;
+}
+
+a:hover {
+	color: #000;
+}
+
+header {
+	margin-bottom: 50px;
+}
+
+.container h1 {
+	margin-bottom: 25px;
+}
+
+.container p a {
+	text-decoration: underline;
+}
+
+.breadcrumb .active {
+	color: #666;
+}
+
+nav {
+	top: 40px;
+	right: 0px;
+	width: 172px;
+	height: 209px;
+	position: fixed;
+	text-align: center;
+	z-index: 1;
+}
+
+.navbar-toggle {
+	background: #5c8490;
+}
+
+.navbar-toggle .icon-bar {
+	background-color: #fff;
+}
+
+nav div {
+	background-color: rgba(92,132,144, 0.9);
+}
+
+.navbar-collapse {
+	position: relative;
+	top: 50px;
+	left: 45px;
+}
+
+nav .navbar-collapse.in {
+	height: 200px !important;
+}
+
+nav ul {
+	position: relative;
+	top: 24px;
+	left: 2px;
+}
+
+nav li {
+	font-family: 'Quicksand', sans-serif;
+	text-transform: uppercase;
+	margin-bottom: 2px;
+	font-size: 13px;
+	letter-spacing: 1px;
+	font-weight: 300;
+}
+
+nav li:after {
+	content: url(../img/nav-line.jpg);
+	display: block;
+	margin-top: -5px;
+}
+
+nav li:last-child:after {
+	content: '';
+}
+
+nav li a {
+	color: #fff;
+}
+
+nav li a:hover {
+	color: #fff;
+}
+
+/* JOB LIST AND DETAIL */
+#job_list li, #job_detail li, #job_detail p, #application_submitted p {
+	font-family: 'Quicksand', sans-serif;
+}
+
+/* APPLICATION FORM */
+#application_form .container, #application_submitted .container {
+	font-family: 'Quicksand', sans-serif;
+}
+
+#application_form label {
+	/*display: block;*/
+}
+
+#application_form form {
+	margin-bottom: 25px;
+}
+
+#application_form .short {
+	width: 50%;
+}
+
+/* Breakpoint alterations */
+@media (min-width: 768px) {
+	nav {
+		background: url(../img/nav-bg.png) no-repeat;
+	}
+	nav div {
+		background: none;
+	}
+	.navbar-collapse {
+		position: relative;
+		top: 0px;
+		left: 0px;
+	}
+	nav ul {
+		position: relative;
+		top: 15px;
+		left: 4px;
+	}
+}
