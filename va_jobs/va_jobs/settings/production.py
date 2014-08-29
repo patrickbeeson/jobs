@@ -59,7 +59,7 @@ SERVER_EMAIL = 'admin@mail.thevariable.com'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'va_jobs',
+        'NAME': 'var_jobs',
         'USER': 'pbeesonva',
         'PASSWORD': 'Th3V@r1able',
         'HOST': '',
