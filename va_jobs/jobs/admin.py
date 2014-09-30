@@ -23,9 +23,10 @@ class ApplicationAdmin(admin.ModelAdmin):
         'resume_download'
     ]
     list_filter = [
-        'can_relocate',
+        'job',
         'status',
-        'submission_date'
+        'submission_date',
+        'can_relocate'
     ]
     fieldsets = (
         ('Contact information', {
