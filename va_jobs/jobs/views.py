@@ -1,9 +1,12 @@
 from __future__ import absolute_import
+import pytz
+import datetime
 
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, CreateView
 from django.http import HttpResponseRedirect
 from django.core.mail import EmailMessage
+from django.utils.timezone import utc
 
 from .models import Job, Application
 from .forms import ApplicationForm
@@ -41,10 +44,14 @@ class ApplicationCreateView(CreateView):
         resume = self.object.resume
         job = self.object.job
 
+        now = datetime.datetime.utcnow().replace(tzinfo=utc)
+        est = pytz.timezone('US/Eastern')
+        submission_date = now.astimezone(est).strftime('%A, %B %d %Y, %I:%M %p')
+
         #Compose message
         email = EmailMessage()
         email.body = 'Name: ' + first_name + last_name + '\n' + 'Email: ' + email_address + '\n' + 'Phone number: ' + str(phone_number) + '\n' + 'Salary requirement: ' + str(salary_requirement) + '\n' + 'Description: ' + description + '\n' + 'Portfolio URL: ' + portfolio_url + '\n' + 'Can relocate: ' + str(can_relocate) + '\n' + 'Start date: ' + str(start_date)
-        email.subject = 'A new application has been submitted for %s' % (job)
+        email.subject = 'A new application has been submitted {submission_date} for {job}'.format(submission_date=submission_date, job=job)
         email.from_email = 'noreply@mail.thevariable.com'
         email.to = ['jobs@thevariable.com']
         email.bcc = ['admin@jobs.thevariable.com']
